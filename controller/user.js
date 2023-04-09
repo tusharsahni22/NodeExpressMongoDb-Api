@@ -1,11 +1,10 @@
 const UserModel = require("../src/Database/model");
 const express = require("express")
-const User =new UserModel()
 
 
 const  addUser = async (req,res)=>{
-    console.log(req.body)
-    const data =  await User.save(req.body)
+    const data =new UserModel(req.body)
+    data.save() 
     res.send(data)
 };
 const  findUser =  (req,res)=>{
