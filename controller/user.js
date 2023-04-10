@@ -17,7 +17,6 @@ const  getUserByParams = async (req,res)=>{
 
 const  getUser = async (req,res)=>{
     const {name ,address,gender,age, phone,sort} =req.query;
-    const _id =req.params.id
     const quriedData ={}
 
     if(name){
@@ -47,5 +46,16 @@ const  getUser = async (req,res)=>{
     
 
 }
+const  updateUser = async (req,res)=>{
+    const id =(req.params.id)
+    let dataToUpdate = req.body    
+    const updatedData = await UserModel.findByIdAndUpdate(id,dataToUpdate,{returnNewDocument:"true"})   
+    res.send(updatedData)
+};
+const  deleteUser = async (req,res)=>{
+    const id =(req.params.id)   
+    const updatedData = await UserModel.findByIdAndDelete(id)   
+    res.send(updatedData)
+};
 
-module.exports = {addUser,getUser,getUserByParams};
+module.exports = {addUser,getUser,getUserByParams,updateUser,deleteUser};
